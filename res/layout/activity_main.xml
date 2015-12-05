@@ -4,11 +4,11 @@
     android:layout_height="match_parent" >
 
     <TextView
-        android:id="@+id/textViewDetectState"
+        android:id="@+id/textViewStatus"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:text="Not detecting"
+        android:text="Status :"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <Button
@@ -16,7 +16,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textViewDetectState"
+        android:layout_below="@+id/textViewStatus"
         android:text="TurnOn" />
 
     <Button

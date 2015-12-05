@@ -19,6 +19,7 @@ import java.util.zip.ZipInputStream;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
+import android.os.Handler;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -45,7 +46,7 @@ public  class  Common {
 		int startLoc = lc_data.indexOf(lc_start_tag) + lc_start_tag.length() ;
 		int endLoc = lc_data.indexOf(lc_end_tag) ; 
 		
-		Common.Logit("startLoc=" + startLoc + " endloc=" + endLoc) ; 
+		// Common.Logit("startLoc=" + startLoc + " endloc=" + endLoc) ; 
 		
 		result = lc_data.substring(startLoc, endLoc) ; 
 		return result ; 
@@ -200,5 +201,18 @@ public  class  Common {
 		}
 		return lastModDate  ; 		
 	}
+	
+	
+	public static void delay(int seconds) {
+		try{
+		    // delay 1 second
+		    Thread.sleep(seconds * 1000);		       
+		} catch(InterruptedException e){
+		    e.printStackTrace();
+		        
+		}
+	}	
+	
+	
 }
 

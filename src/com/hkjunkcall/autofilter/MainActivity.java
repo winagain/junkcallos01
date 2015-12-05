@@ -20,20 +20,21 @@ public class MainActivity extends Activity {
 
 	private boolean detectEnabled;
 	
-	private TextView textViewDetectState;
+	private TextView textViewStatus;
 	private Button buttonToggleDetect;
 	private Button buttonExit , buttonDownload;
 	
 	private String csv_file ; 
-	
+	Thread_download_csv download_csv ; 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
+    	
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         csv_file = CallHelper.get_csv_file(this) ; 
         
-        textViewDetectState = (TextView) findViewById(R.id.textViewDetectState);
+        textViewStatus = (TextView) findViewById(R.id.textViewStatus);
         
         buttonToggleDetect = (Button) findViewById(R.id.buttonDetectToggle);
         buttonToggleDetect.setOnClickListener(new OnClickListener() {
@@ -70,45 +71,41 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				// setDetectEnabled(false);							
-				Thread_download_csv download_csv = new Thread_download_csv() ; 
-				download_csv.setup(v.getContext() , csv_file ) ; 
-				download_csv.start() ;  
-			}
-		});
-
-        
-        Date last_csv_date = Common.getFileDate("" ,csv_file ) ; 
-        if (last_csv_date != null) {
-        	buttonDownload.setText("Download JunkCall Data , Lastest : " + last_csv_date) ;
-        }
+				download_csv = new Thread_download_csv() ; 
+				// download_csv.setup(v.getContext() , csv_file ) ; 
+				download_csv.setup(v , csv_file ) ;
+				download_csv.start() ;
+				
+				// Common.ShowAlertDialog(v.getContext(), "" , "Downloading....") ;
+				Common.delay(5) ;
+/*				String lc_progress = "Downloading...." ; 
+				for (int ii=0 ; ii<10;ii++) {					
+					lc_progress = lc_progress + "." ; 
+					refresh_status(lc_progress) ;
+					Common.delay(1) ;
+				}
+*/				
+				
+				refresh_status("") ;
+			}		
+		});        
+        refresh_status("") ; 
     }
 
 
-    
-    
-    private void download_csv() {
-		new Thread() {
-		    @Override
-		    public void run() {
-		        try {
-					String lc_app_dir = getApplicationInfo().dataDir ;
-					String lc_local_file = lc_app_dir + "/junkphonelist.csv"  ;					
-					String tmp1x = "" , lc_url; 
-					// Common.ShowAlertDialog(v.getContext(), "Title " , lc_local_file ) ;
-					// Common.toast_mess(, "HELLO") ;
-					
-					// lc_url = "http://toimy.blogspot.hk/2010/08/android-alertdialog.html" ; 
-					lc_url = "http://hkjunkcall.com/Download/download.asp?DownloadID=6" ; 
-					tmp1x = Common.DownloadFiles(lc_url , lc_local_file) ;
-					// Common.ShowAlertDialog(v.getContext(), "Title " , tmp1x) ;
-
-		        	//Your code goes here
-		        } catch (Exception e) {
-		            e.printStackTrace();
-		        }
-		    }
-		}.start();						    
+    public void refresh_status(String lc_mess) {
+    	if (lc_mess.length() ==  0) { 
+	        Date last_csv_date = Common.getFileDate("" ,csv_file ) ;
+	        lc_mess = "Please Download JunkCall Data"  ;
+	        if (last_csv_date != null) {
+	        	lc_mess = last_csv_date.toLocaleString() ; 
+	        }
+    	}
+    	lc_mess = "JunkCall Data : " + lc_mess ;  
+    	textViewStatus.setText(lc_mess) ;        
     }
+    
+    
     
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -125,14 +122,14 @@ public class MainActivity extends Activity {
             startService(intent);
             
             buttonToggleDetect.setText("Turn off");
-    		textViewDetectState.setText("Detecting");
+            textViewStatus.setText("Detecting");
     	}
     	else {
     		// stop detect service
     		stopService(intent);
     		
     		buttonToggleDetect.setText("Turn on");
-    		textViewDetectState.setText("Not detecting");
+    		textViewStatus.setText("Not detecting");
     	}
     }
     
