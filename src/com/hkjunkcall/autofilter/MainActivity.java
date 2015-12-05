@@ -69,9 +69,7 @@ public class MainActivity extends Activity {
         buttonDownload.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// setDetectEnabled(false);
-				
-				
+				// setDetectEnabled(false);							
 				Thread_download_csv download_csv = new Thread_download_csv() ; 
 				download_csv.setup(v.getContext() , csv_file ) ; 
 				download_csv.start() ;  
