@@ -9,6 +9,7 @@ public class Thread_download_csv extends Thread  {
 	private String csv_file ;
 	private View v ; 
 	
+	
 	// public void setup(Context in_ctx , String in_csv_file) {
 	public void setup(View in_v , String in_csv_file) {
 		v = in_v ; 
@@ -29,10 +30,14 @@ public class Thread_download_csv extends Thread  {
 			// Common.toast_mess(, "HELLO") ;
 			
 			// lc_url = "http://toimy.blogspot.hk/2010/08/android-alertdialog.html" ; 
-			// lc_url = "http://hkjunkcall.com/Download/download.asp?DownloadID=6" ; 
-			lc_url = "http://junkcall01.appspot.com/junkcall01_web" ;
+			 
+
+			// to avoid junkcall01's admin change their csv , change to using my own appspot 
+			lc_url = "http://junkcall01.appspot.com/junkcallos01_web" ;
+			// lc_url = "http://hkjunkcall.com/Download/download.asp?DownloadID=6" ;
 			
 			tmp1x = Common.DownloadFiles(lc_url , csv_file) ;
+
 
 			Common.Logit(lc_url) ; 
 			
@@ -44,14 +49,18 @@ public class Thread_download_csv extends Thread  {
 			Common.Logit(lc_data) ; 
 			lc_url = Common.str_extr_betw(lc_data , "<a href='" , "' target='main'>") ;
 			
-			String lc_zip_file = lc_app_dir + "tmp.zip" ;
-			
-			Common.Logit(lc_url) ;
-			Common.Logit(lc_app_dir) ;
-			Common.Logit(lc_zip_file) ;
-			
-			tmp1x = Common.DownloadFiles(lc_url , lc_zip_file) ;
-			Common.unpackZip(lc_zip_file, lc_app_dir) ;		
+			if (lc_url.contains(".zip")) { 
+				String lc_zip_file = lc_app_dir + "tmp.zip" ;
+				
+				Common.Logit(lc_url) ;
+				Common.Logit(lc_app_dir) ;
+				Common.Logit(lc_zip_file) ;
+				
+				tmp1x = Common.DownloadFiles(lc_url , lc_zip_file) ;
+				Common.unpackZip(lc_zip_file, lc_app_dir) ;
+			} else {
+				tmp1x = Common.DownloadFiles(lc_url , csv_file) ;
+			}
 
         } catch (Exception e) {
             e.printStackTrace();

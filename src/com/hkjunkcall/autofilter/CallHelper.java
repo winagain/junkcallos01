@@ -59,7 +59,7 @@ public class CallHelper {
 		}
 		
 		public String search_from_database(Context ctx , String lc_telno) {			
-			String result = "" ; 
+			String result = "" , tmp1x ; 
 			result = lc_telno ; 
 /*			String lc_app_dir = ctx.getApplicationInfo().dataDir ;
 			csv_file = lc_app_dir.trim() + "/JunkPhoneList.csv"  ;
@@ -76,7 +76,8 @@ public class CallHelper {
 			    while(line != null){
 			        // Log.d("StackOverflow", line);
 			    	if (line.contains(lc_telno)) {
-			    		result = result + " JJJJJJJ" ; 
+			    		tmp1x = Common.str_extr_betw(line, "<cn>", "</cn>") ; 
+			    		result = result + tmp1x ; 
 			    		break ; 
 			    	}
 			        line = reader.readLine();			        
