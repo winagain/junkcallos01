@@ -29,7 +29,9 @@ public class Thread_download_csv extends Thread  {
 			// Common.toast_mess(, "HELLO") ;
 			
 			// lc_url = "http://toimy.blogspot.hk/2010/08/android-alertdialog.html" ; 
-			lc_url = "http://hkjunkcall.com/Download/download.asp?DownloadID=6" ; 
+			// lc_url = "http://hkjunkcall.com/Download/download.asp?DownloadID=6" ; 
+			lc_url = "http://junkcall01.appspot.com/junkcall01_web" ;
+			
 			tmp1x = Common.DownloadFiles(lc_url , csv_file) ;
 
 			Common.Logit(lc_url) ; 

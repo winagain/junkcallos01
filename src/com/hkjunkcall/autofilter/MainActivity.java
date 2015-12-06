@@ -78,6 +78,7 @@ public class MainActivity extends Activity {
 				
 				// Common.ShowAlertDialog(v.getContext(), "" , "Downloading....") ;
 				Common.delay(5) ;
+				
 /*				String lc_progress = "Downloading...." ; 
 				for (int ii=0 ; ii<10;ii++) {					
 					lc_progress = lc_progress + "." ; 
@@ -87,6 +88,7 @@ public class MainActivity extends Activity {
 */				
 				
 				refresh_status("") ;
+				Common.toast_mess(v.getContext(), "Completed.") ; 
 			}		
 		});        
         refresh_status("") ; 

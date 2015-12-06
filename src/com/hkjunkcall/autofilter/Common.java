@@ -1,6 +1,7 @@
 package com.hkjunkcall.autofilter;
 
 
+
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
@@ -19,7 +20,6 @@ import java.util.zip.ZipInputStream;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
-import android.os.Handler;
 import android.util.Log;
 import android.widget.Toast;
 
