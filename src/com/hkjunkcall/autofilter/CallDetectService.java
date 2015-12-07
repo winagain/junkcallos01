@@ -5,10 +5,9 @@ import android.app.Service;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.IBinder;
-import android.text.Html;
 import android.util.Log;
 import android.view.WindowManager;
-import android.widget.TextView;
+
 /**
  * Call detect service. 
  * This service is needed, because MainActivity can lost it's focus,

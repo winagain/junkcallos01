@@ -43,16 +43,17 @@ public class CallHelper {
 					message = message + " Fion " ; 
 				}
 				message =  message + incomingNumber ;
-*/
-				message = search_from_database(ctx , incomingNumber) ; 
+*/				
+				 
 				
 /*				Toast.makeText(ctx, 
 						message , 
 						Toast.LENGTH_LONG).show();*/
-			    
-				 ((CallDetectService) ctx).showDialog("JunkCallOS" , message) ; 
-/*				showDialog(ctx , "JunkcallOS" , message) ;*/   
-
+				
+				if (incomingNumber != null && incomingNumber.length() > 4) {
+					message = search_from_database(ctx , incomingNumber) ;
+					 ((CallDetectService) ctx).showDialog("JunkCallOS" , message) ;
+				}
 				
 				break;
 			}
